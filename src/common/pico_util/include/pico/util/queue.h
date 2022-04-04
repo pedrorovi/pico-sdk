@@ -31,7 +31,7 @@ extern "C" {
 
 typedef struct {
     lock_core_t core;
-    uint8_t *data;
+    int16_t *data;
     uint16_t wptr;
     uint16_t rptr;
     uint16_t element_size;

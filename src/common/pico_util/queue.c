@@ -10,7 +10,7 @@
 
 void queue_init_with_spinlock(queue_t *q, uint element_size, uint element_count, uint spinlock_num) {
     lock_init(&q->core, spinlock_num);
-    q->data = (uint8_t *)calloc(element_count + 1, element_size);
+    q->data = (int16_t *)calloc(element_count + 1, 2);
     q->element_count = (uint16_t)element_count;
     q->element_size = (uint16_t)element_size;
     q->wptr = 0;
@@ -23,7 +23,8 @@ void queue_free(queue_t *q) {
 
 static inline void *element_ptr(queue_t *q, uint index) {
     assert(index <= q->element_count);
-    return q->data + index * q->element_size;
+    // return q->data + index * q->element_size;
+    return q->data + index;
 }
 
 static inline uint16_t inc_index(queue_t *q, uint16_t index) {
